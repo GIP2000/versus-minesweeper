@@ -1,0 +1,23 @@
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 5vh;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    background-color: lightgrey;    
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left {
+    display: flex; 
+    gap: 10px; 
+    flex-grow: 2; 
+    padding-left: 10px; 
+}
+
+.right {
+    padding-right: 10px; 
+}

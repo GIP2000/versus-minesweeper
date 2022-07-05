@@ -14,9 +14,28 @@ datasource db {
 }
 
 model User {
-  id         Int     @id @default(autoincrement())
-  email      String
-  name       String?
-  followedBy User[]  @relation("UserFollows")
-  following  User[]  @relation("UserFollows")
+  id              Int             @id @default(autoincrement())
+  email           String
+  name            String?
+  followedBy      User[]          @relation("UserFollows")
+  following       User[]          @relation("UserFollows")
+  boards          BoardInstance[]
+}
+
+model StaticBoard {
+  id              Int             @id @default(autoincrement())
+  board           Bytes           @db.Blob
+  startX          Int
+  startY          Int
+  instances       BoardInstance[]
+}
+
+model BoardInstance {
+  id              Int           @id @default(autoincrement())
+  staticBoardId   Int
+  staticBoard     StaticBoard   @relation(fields: [staticBoardId], references: [id])
+  clickedMask     Bytes         @db.Blob
+  flaggedMask     Bytes         @db.Blob
+  userId          Int
+  user            User          @relation(fields: [userId], references: [id])
 }
